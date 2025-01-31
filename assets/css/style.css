@@ -1,0 +1,121 @@
+body {
+    font-family: 'Times New Roman', serif;
+    background: #f0f0f0;
+    padding: 20px;
+    font-size:14px;
+}
+
+.container {
+    border-radius:5px;
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.subtitle{
+    font-weight:bolder;
+}
+
+p{
+    width:100%;
+    text-align:justify;
+    margin:0;
+    padding:0;
+    line-height:1.2;
+}
+
+p + p{
+    margin-top:5px;
+}
+
+.box h3{
+    text-align:center;
+}
+
+.box{
+    display:flex;
+    flex-direction:column;
+    font-size:13px;
+}
+
+fieldset {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+legend {
+    font-weight: bold;
+    color: #333;
+}
+
+input {
+    text-transform: uppercase;
+    width:50%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+button {
+    background: #2c3e50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #34495e;
+}
+
+.hidden {
+    display: none;
+}
+
+
+
+/* No arquivo style.css */
+#contratoContent {
+    width: 210mm !important;
+    min-height: 297mm;
+    padding: 20px 35px; /* Margens internas compatíveis com A4 */
+    box-sizing: border-box;
+    word-wrap: break-word; /* Quebra palavras longas */
+    overflow-wrap: anywhere;
+    hyphens: auto; /* Hifenização automática */
+    text-align: justify;
+    margin: 0 auto;
+}
+
+/* Ajuste para parágrafos */
+#contratoContent p {
+    width: 100%;
+    max-width: 100%;
+    margin: 10px 0;
+    padding: 0;
+    line-height: 1.6;
+    text-indent: 40px; /* Recuo de parágrafo */
+    orphans: 3; /* Evita linhas solitárias */
+    widows: 3;
+}
+
+
+.clausula {
+    margin-bottom: 20px;
+}
+
+.page-break {
+  break-before: page;
+  height: 1px;
+  background: red; /* Apenas para debug visual */
+  margin: 0;
+  visibility: hidden;
+}
