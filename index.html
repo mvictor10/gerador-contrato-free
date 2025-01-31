@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Contrato de Locação</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Gerador de Contrato de Locação Residencial</h1>
+        
+        <!-- Formulário -->
+        <form id="contratoForm">
+            <!-- Seção Locador -->
+            <fieldset>
+                <legend>Dados do Locador</legend>
+                <input type="text" id="locadorNome" placeholder="Nome Completo" required>
+                <input type="text" id="locadorNacionalidade" placeholder="Nacionalidade" list="nacionalidade">
+                <datalist id="nacionalidade">
+                    <option value="Brasileiro">
+                    <option value="Estrangeiro">
+                </datalist>
+                <input type="text" id="locadorEstadoCivil" name="locadorEstadoCivil" list="maritalStatus">
+                <datalist id="maritalStatus">
+                    <option value="Casado">
+                    <option value="Solteiro">
+                    <option value="Divorciado">
+                    <option value="Viúvo">
+                    <option value="União Estável">
+                </datalist>
+                <input type="text" id="locadorProfissao" placeholder="Profissão" required>
+                <input type="text" id="locadorRG" placeholder="RG" class="mask-rg" required>
+                <input type="text" id="locadorCPF" placeholder="CPF" class="mask-cpf" required>
+                <input type="text" id="locadorLogradouro" name="locadorLogradouro" placeholder="Logradouro" required>
+                <input type="text" id="locadorComplemento" name="locadorComplemento" placeholder="Complemento">
+                <input type="text" id="locadorNumero" name="locadorNumero" placeholder="Número" required>
+                <input type="text" id="locadorBairro" name="locadorBairro" placeholder="Bairro" required>
+                <input type="text" id="locadorCEP" name="locadorCEP" placeholder="CEP" class="mask-cep" required>
+                <input type="text" id="locadorCidade" name="locadorCidade" placeholder="Cidade" required>
+                <input type="text" 
+                       id="locadorUF" 
+                       name="locadorUF" 
+                       list="estadosBrasil"
+                       style="text-transform: uppercase; width: 60px;"
+                       oninput="this.value = this.value.toUpperCase()"
+                       maxlength="2"
+                       placeholder="UF">
+
+                <datalist id="estadosBrasil">
+                    <option value="AC">
+                    <option value="AL">
+                    <option value="AP">
+                    <option value="AM">
+                    <option value="BA">
+                    <option value="CE">
+                    <option value="DF">
+                    <option value="ES">
+                    <option value="GO">
+                    <option value="MA">
+                    <option value="MT">
+                    <option value="MS">
+                    <option value="MG">
+                    <option value="PA">
+                    <option value="PB">
+                    <option value="PR">
+                    <option value="PE">
+                    <option value="PI">
+                    <option value="RJ">
+                    <option value="RN">
+                    <option value="RS">
+                    <option value="RO">
+                    <option value="RR">
+                    <option value="SC">
+                    <option value="SP">
+                    <option value="SE">
+                    <option value="TO">
+                </datalist>
+            </fieldset>
+
+            <!-- Seção Locatário -->
+            <fieldset>
+                <legend>Dados do Locatário</legend>
+                <input type="text" id="locatarioNome" placeholder="Nome Completo" required>
+                <input type="text" id="locatarioNacionalidade" placeholder="Nacionalidade" list="nacionalidade">
+                <datalist id="nacionalidade">
+                    <option value="Brasileiro">
+                    <option value="Estrangeiro">
+                </datalist>
+                <input type="text" id="locatarioEstadoCivil" name="locatarioEstadoCivil" list="maritalStatus">
+                <datalist id="maritalStatus">
+                    <option value="Casado">
+                    <option value="Solteiro">
+                    <option value="Divorciado">
+                    <option value="Viúvo">
+                    <option value="União Estável">
+                </datalist>
+                <input type="text" id="locatarioProfissao" placeholder="Profissão" required>
+                <input type="text" id="locatarioRG" placeholder="RG" class="mask-rg" required>
+                <input type="text" id="locatarioCPF" placeholder="CPF" class="mask-cpf" required>
+                <input type="text" id="locatarioLogradouro" name="locatarioLogradouro" placeholder="Logradouro" required>
+                <input type="text" id="locatarioComplemento" name="locatarioComplemento" placeholder="Complemento">
+                <input type="text" id="locatarioNumero" name="locatarioNumero" placeholder="Número" required>
+                <input type="text" id="locatarioBairro" name="locatarioBairro" placeholder="Bairro" required>
+                <input type="text" id="locatarioCEP" name="locatarioCEP" placeholder="CEP" class="mask-cep" required>
+                <input type="text" id="locatarioCidade" name="locatarioCidade" placeholder="Cidade" required>
+                <input type="text" 
+                       id="locatarioUF" 
+                       name="locatarioUF" 
+                       list="estadosBrasil"
+                       style="text-transform: uppercase; width: 60px;"
+                       oninput="this.value = this.value.toUpperCase()"
+                       maxlength="2"
+                       placeholder="UF">
+
+                <datalist id="estadosBrasil">
+                    <!-- Mesmas opções de UF anteriores -->
+                    <option value="AC"><option value="AL"><option value="AP"><option value="AM"><option value="BA">
+                    <option value="CE"><option value="DF"><option value="ES"><option value="GO"><option value="MA">
+                    <option value="MT"><option value="MS"><option value="MG"><option value="PA"><option value="PB">
+                    <option value="PR"><option value="PE"><option value="PI"><option value="RJ"><option value="RN">
+                    <option value="RS"><option value="RO"><option value="RR"><option value="SC"><option value="SP">
+                    <option value="SE"><option value="TO">
+                </datalist>
+            </fieldset>
+
+            <!-- Dados do Imóvel -->
+            <fieldset>
+                <legend>Dados do Imóvel</legend>
+                <input type="text" id="imovelLogradouro" placeholder="Logradouro" required>
+                <input type="text" id="imovelComplemento" placeholder="Complemento">
+                <input type="text" id="imovelNumero" placeholder="Número" required>
+                <input type="text" id="imovelBairro" placeholder="Bairro" required>
+                <input type="text" id="imovelCEP" placeholder="CEP" class="mask-cep" required>
+                <input type="text" id="imovelCidade" placeholder="Cidade" required>
+                <input type="text" id="imovelUF" name="locadorUF" list="estadosBrasil" style="width:500px;">
+                <datalist id="estadosBrasil">
+                    <option value="AC">
+                    <option value="AL">
+                    <option value="AP">
+                    <option value="AM">
+                    <option value="BA">
+                    <option value="CE">
+                    <option value="DF">
+                    <option value="ES">
+                    <option value="GO">
+                    <option value="MA">
+                    <option value="MT">
+                    <option value="MS">
+                    <option value="MG">
+                    <option value="PA">
+                    <option value="PB">
+                    <option value="PR">
+                    <option value="PE">
+                    <option value="PI">
+                    <option value="RJ">
+                    <option value="RN">
+                    <option value="RS">
+                    <option value="RO">
+                    <option value="RR">
+                    <option value="SC">
+                    <option value="SP">
+                    <option value="SE">
+                    <option value="TO">
+                </datalist>            
+            </fieldset>
+            <!-- Termos do Contrato -->
+            <fieldset>
+                <legend>Termos do Contrato</legend>
+                <input type="number" id="valorAluguel" placeholder="Valor do Aluguel" required>
+                <input type="date" id="dataInicio" required>
+                <input type="date" id="dataTermino" required>
+                <input type="number" id="taxaLimpeza" placeholder="Taxa de Limpeza (R$)" value="25">
+            </fieldset>
+
+            <fieldset>
+                <legend>Informações Adicionais</legend>
+                <input type="text" id="contratoCidade" placeholder="Munícipio" required>
+                <input type="text" id="contratoUF" name="locadorUF" list="estadosBrasil" style="width:500px;">
+                <datalist id="estadosBrasil">
+                    <option value="AC">
+                    <option value="AL">
+                    <option value="AP">
+                    <option value="AM">
+                    <option value="BA">
+                    <option value="CE">
+                    <option value="DF">
+                    <option value="ES">
+                    <option value="GO">
+                    <option value="MA">
+                    <option value="MT">
+                    <option value="MS">
+                    <option value="MG">
+                    <option value="PA">
+                    <option value="PB">
+                    <option value="PR">
+                    <option value="PE">
+                    <option value="PI">
+                    <option value="RJ">
+                    <option value="RN">
+                    <option value="RS">
+                    <option value="RO">
+                    <option value="RR">
+                    <option value="SC">
+                    <option value="SP">
+                    <option value="SE">
+                    <option value="TO">
+                </datalist>  
+            </fieldset>
+
+            <button type="submit">Gerar Contrato</button>
+        </form>
+
+        <!-- Visualização do Contrato -->
+        <div id="contratoPreview" class="hidden">
+            <div id="contratoContent" style="display:inline-block;">
+                <!-- Seu conteudo aqui -->
+            </div>
+            <button id="exportarPDF">Exportar para PDF</button>
+        </div>
+    </div>
+    <script defer src="./assets/js/contrato.js"></script>
+</body>
+</html>
